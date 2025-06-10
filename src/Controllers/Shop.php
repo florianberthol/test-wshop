@@ -39,17 +39,14 @@ class Shop extends Controller
         if (isset($data['order'])) {
             if (empty($data['order']['field']) && empty($data['order']['direction'])) {
                 $this->jsonResponse(["error" => "You must set field and direction parameters"], 400);
-                return;
             }
 
             if (!in_array($data['order']['field'], ['id', 'name', 'address', 'zip', 'city'])) {
                 $this->jsonResponse(["error" => "Invalid field parameter"], 400);
-                return;
             }
 
             if (!in_array($data['order']['direction'], ['ASC', 'DESC', 'asc', 'desc'])) {
                 $this->jsonResponse(["error" => "Invalid direction parameter, must be ASC or DESC"], 400);
-                return;
             }
             $queryString .= " ORDER BY {$data['order']['field']} {$data['order']['direction']}";
         }
@@ -70,7 +67,6 @@ class Shop extends Controller
 
         if (empty($shop)) {
             $this->jsonResponse(["error" => "Shop with id $id not found"], 404);
-            return;
         }
 
         $this->jsonResponse($shop);
@@ -83,11 +79,9 @@ class Shop extends Controller
         // Validation
         if (empty($data['name'])) {
             $this->jsonResponse(["error" => "You must set shop name"], 400);
-            return;
         }
         if (!empty($data['name'] && !preg_match("/^[0-9]{5}$/", $data['zip']))) {
             $this->jsonResponse(["error" => "Invalid zip code"], 400);
-            return;
         }
 
         $db = DB::getInstance()->getConnection();
@@ -114,7 +108,6 @@ class Shop extends Controller
 
         if (!$this->isShopExists($id)) {
             $this->jsonResponse(["error" => "Shop with id $id not found"], 404);
-            return;
         }
 
         $queryString = "UPDATE shop SET ";
@@ -157,7 +150,6 @@ class Shop extends Controller
 
         if (!$this->isShopExists($id)) {
             $this->jsonResponse(["error" => "Shop with id $id not found"], 404);
-            return;
         }
 
         $query = $db->prepare("DELETE FROM shop WHERE id = :id");
