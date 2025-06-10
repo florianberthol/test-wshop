@@ -1,0 +1,41 @@
+services:
+  wshop-nginx:
+    image: nginx:latest
+    container_name: wshop-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - wshop-php
+    networks:
+      - app_network
+
+  wshop-php:
+    container_name: wshop-php
+    volumes:
+      - ./:/var/www
+    networks:
+      - app_network
+    build: docker/php
+
+  wshop-mariadb:
+    image: mariadb:latest
+    container_name: wshop-mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - app_network
+
+volumes:
+  mariadb_data:
+
+networks:
+  app_network:
+    driver: bridge
