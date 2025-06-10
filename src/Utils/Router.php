@@ -49,6 +49,10 @@ class Router
                 call_user_func_array($method, array_values($matches));
             }
         }
+
+        // If no route matched, return a 404 response
+        header('Content-Type: application/json', true, 404);
+        echo json_encode(['error' => 'Not Found']);
     }
 
     /**
