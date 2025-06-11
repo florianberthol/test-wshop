@@ -1,0 +1,69 @@
+Les questions se basent sur une version PHP 7.
+
+1. A quoi sert "continue" à l'intérieur d'une boucle "for" ou "foreach" ? 4
+
+1.	sort de la boucle itérative
+2.	demande a poursuivre le code même en cas d'erreur
+3.	cette instruction n'existe pas en PHP
+4.	passe à l'itération suivante
+
+2. Quelle fonction de bufferisation (temporisation) envoie au navigateur les données contenues par le tampon, et stoppe la tamporisation de sortie ? 2
+
+1.	ob_flush()
+2.	ob_end_flush()
+3.	ob_get_flush()
+
+3. Afin de se prévenir les attaques CSRF, quelles mesures peut on prendre ? 2
+.
+1.	Utiliser strip_tags()
+2.	Ajouter un jeton unique dans chaque formulaire (token)
+3.	Utiliser htmlspecialchars()
+4.	Utiliser PDO (requêtes paramétées ) ou mysql_real_escape_string()
+
+4. Que se passe-t-il lors de l’exécution de ce script 3
+
+<?php
+$value = [];
+foreach($value as $val) {
+               echo $val;
+}
+1.	Cela provoque une erreur PHP
+2.	Cela provoque une notice PHP
+3.	Aucun des deux
+
+5. Quelle est la principale différence entre les fonctions PHP isset() et array_key_exists() lorsque l'on vérifie si un élément existe dans un tableau ? 4
+
+1.	array_key_exists() est beaucoup plus rapide pour les tableaux
+2.	isset() créera une valeur valeur vide dans le tableau si la clé n'existe pas
+3.	isset() lévera un avertissement PHP si la clé n'existe pas
+4.	isset() renvera false si la clé existe, mais que sa valeur est null
+
+6. Que va afficher le code suivant : <?php echo count(false); ? 2
+1. 0
+2. 1
+3. Une erreur de type warning est déclenchée
+4. Une erreur fatale est déclenchée
+
+7. A quoi servent les classes de type Reflection? 1
+1. A faire une introspection sur des classes, méthodes et fonctions ou encore de récupérer des blocs de commentaires.
+2. A cloner une variable
+3. A faire une pause dans l'exécution d'un script
+4. A afficher des données
+
+8. Que fait la fonction unset() ? 1
+1. Elle permet de supprimer un fichier
+2. Elle permet de supprimer un répertoire
+3. Elle permet de détruire une variable
+4. Elle n'existe pas
+
+9. Qu'est-ce que le cast d'une variable ? 2
+1. Ca permet de rendre une variable globale
+2. Ca permet de détruire une variable
+3. Ca permet de changer le type d'une variable
+4. Ca permet d'afficher le contenu d'une variable
+
+10. Que va afficher le code suivant : <?php echo '100' === 100 ? 'Identique' : 'Différent'; ?> 2
+1. Identique
+2. Différent
+3. Rien
+4. Il y a une erreur de syntaxe
