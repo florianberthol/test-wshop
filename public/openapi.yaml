@@ -1,0 +1,227 @@
+openapi: 3.0.0
+info:
+  title: Shop API
+  version: "0.0.1"
+
+paths:
+  /shops:
+    post:
+      summary: Get all shops
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: magasin
+                address:
+                  type: string
+                  example: 15 rue de la mairie
+                zip:
+                  type: string
+                  example: "73200"
+                city:
+                  type: string
+                  example: Trés loin
+                order:
+                  type: object
+                  properties:
+                    field:
+                      type: string
+                      example: 6
+                    direction:
+                      type: string
+                      enum: [asc, desc]
+                      example: asc
+      responses:
+        "200":
+          description: Get shops data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 6
+                    name:
+                      type: string
+                      example: troisiéme magasin à droite
+                    address:
+                      type: string
+                      example: 15 rue de la gare
+                    zip:
+                      type: string
+                      example: "73200"
+                    city:
+                      type: string
+                      example: Trés loin
+        "400":
+          description: Invalid querry parameters
+
+  /shop/{id}:
+    get:
+      summary: Get a shop by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Shop ID
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Get shop data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 6
+                    name:
+                      type: string
+                      example: troisiéme magasin à droite
+                    address:
+                      type: string
+                      example: 15 rue de la gare
+                    zip:
+                      type: string
+                      example: "73200"
+                    city:
+                      type: string
+                      example: Trés loin
+        "404":
+          description: Shop not found
+
+    put:
+      summary: Update a shop by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Shop ID
+          schema:
+            type: integer
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: magasin
+                address:
+                  type: string
+                  example: 15 rue de la mairie
+                zip:
+                  type: string
+                  example: "73200"
+                city:
+                  type: string
+                  example: Trés loin
+      responses:
+        "200":
+          description: Magasin mis à jour
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 7
+                    name:
+                      type: string
+                      example: magasin
+                    address:
+                      type: string
+                      example: 15 rue de la mairie
+                    zip:
+                      type: string
+                      example: "73200"
+                    city:
+                      type: string
+                      example: Trés loin
+        "400":
+          description: Invalid data
+        "404":
+          description: Shop not found
+
+    delete:
+      summary: Delete a shop by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Shop ID
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Shop deleted successfully
+        "404":
+          description: Shop not found
+
+  /shop:
+    post:
+      summary: Create a new shop
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required: [name, address, zip, city]
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: magasin
+                address:
+                  type: string
+                  example: 15 rue de la mairie
+                zip:
+                  type: string
+                  example: "73200"
+                city:
+                  type: string
+                  example: Trés loin
+      responses:
+        "201":
+          description: Magasin créé avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 7
+                    name:
+                      type: string
+                      example: magasin
+                    address:
+                      type: string
+                      example: 15 rue de la mairie
+                    zip:
+                      type: string
+                      example: "73200"
+                    city:
+                      type: string
+                      example: Trés loin
+        "400":
+          description: Invalid data

@@ -7,7 +7,12 @@ use Utils\DB;
 
 class Shop extends Controller
 {
-    public function getAllShops()
+    /**
+     * Get all shop, and filter by name, address, zip and city
+     *
+     * @return void
+     */
+    public function findShops(): void
     {
         $db = DB::getInstance()->getConnection();
         $data = json_decode(file_get_contents('php://input'), true);
@@ -58,6 +63,12 @@ class Shop extends Controller
         $this->jsonResponse($shop);
     }
 
+    /**
+     * Get a shop by ID
+     *
+     * @param int $id
+     * @return void
+     */
     public function getShop(int $id): void
     {
         $db = DB::getInstance()->getConnection();
@@ -72,6 +83,11 @@ class Shop extends Controller
         $this->jsonResponse($shop);
     }
 
+    /**
+     * Create a new shop
+     *
+     * @return void
+     */
     public function postShop(): void
     {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -101,6 +117,12 @@ class Shop extends Controller
         $this->jsonResponse($shop);
     }
 
+    /**
+     * Update a shop by ID
+     *
+     * @param int $id
+     * @return void
+     */
     public function putShop(int $id): void
     {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -144,6 +166,12 @@ class Shop extends Controller
         $this->jsonResponse($shop);
     }
 
+    /**
+     * Delete a shop by ID
+     *
+     * @param int $id
+     * @return void
+     */
     public function deleteShop(int $id): void
     {
         $db = DB::getInstance()->getConnection();
@@ -158,6 +186,12 @@ class Shop extends Controller
         $this->jsonResponse(["Shop $id deleted successfully!"]);
     }
 
+    /**
+     * Check if a shop with the given ID exist
+     *
+     * @param int $id
+     * @return bool
+     */
     private function isShopExists(int $id): bool
     {
         $db = DB::getInstance()->getConnection();
